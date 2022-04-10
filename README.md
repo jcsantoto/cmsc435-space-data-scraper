@@ -17,6 +17,6 @@ docker run space-scraper
 #### Maurice: 20%,
 #### John: 20%,
 #### Johnny: 20% 
-####Scraped information about solar weather including: solar wind speeds, density, and temperatures. <br />
+#### Scraped information about solar weather including: solar wind speeds, density, and temperatures. <br />
 #### Dockerized the program and updated README with instructions for how to run the program.
 
