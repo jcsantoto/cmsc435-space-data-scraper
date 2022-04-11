@@ -3,6 +3,8 @@ This is a scraper program that scrapes space data from various sources
 such as spaceweatherlive and NOAA. The user can do various things with this data that
 is scraped which are described below in the available commands.
 
+The repository contains several files which contain the backend for the scraping of these various 
+datasets. The CLI python file is the main program that is interacted with.
 # Running the Program
 To run the program, we provided a Dockerfile which can generate an image in Docker. This will
 add all the required libraries and will run the program for you. The following commands are needed:
@@ -47,6 +49,6 @@ Wrote the CLI for the program. Recorded and wrote the scrum logs.
 Scraped information from spaceweatherlive and NOAA for solar flare activity.
 #### Johnny: 20% 
 Scraped information about solar weather including: solar wind speeds, density, and temperatures. 
-Wrote tests for this portion of the program.
+Wrote tests.
 Dockerized the program and updated README.
 
