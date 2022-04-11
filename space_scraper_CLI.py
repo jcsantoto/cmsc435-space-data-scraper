@@ -1,11 +1,8 @@
 import argparse
-from datetime import date
-from datetime import timedelta
-
-import data_fetcher
+from alerts_backend import Alerts
 from data_fetcher import SolarWeatherFetcher
-from SolarFlareFetcher import SolarFlareFetcher
-from data_fetcher import DataFetcher
+from SolarFlareFetcher import SolarFlareFetcherSWL
+from SolarFlareFetcher import SolarFlareFetcherNOAA
 
 parser = argparse.ArgumentParser(description="For each of the commands below type the command followed by the argument"
                                              "to specify the action you want to perform.")
@@ -74,12 +71,13 @@ if download != '':
 
 if view != '':
     if view == 'DailySolarFlare':
-        print(SolarFlareFetcher.format_flare_website_data())
+        print(SolarFlareFetcherSWL.format_website_data())
+        print("{0} \n\n".format(SolarFlareFetcherNOAA.format_website_data()))
     else:
         print("error: unrecognized command \"-view {0}\". Try \"-view DailySolarFlare\" instead".format(view))
 
 if check != '':
     if check == 'Feed':
-        print(check)
+        print(Alerts.get_alert())
     else:
         print("error: unrecognized command \"-check {0}\". Try \"-check Feed\" instead".format(check))
