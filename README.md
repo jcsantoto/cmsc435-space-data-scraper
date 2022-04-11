@@ -49,6 +49,5 @@ Wrote the CLI for the program. Recorded and wrote the scrum logs.
 Scraped information from spaceweatherlive and NOAA for solar flare activity.
 #### Johnny: 25% 
 Scraped information about solar weather including: solar wind speeds, density, and temperatures. 
-Wrote tests.
 Dockerized the program and updated README.
 
