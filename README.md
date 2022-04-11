@@ -39,15 +39,15 @@ docker run space-scraper -check Feed
 
 
 # Group Efforts and Tasks
-#### Abhinav: 20%
+#### Abhinav: 15%
 Wrote code to alert the user about various solar data such as solar wind speed.
-#### Derek: 20%
+#### Derek: 10%
 Wrote code to generate a url and download 30 day solar wind datasets.
-#### Maurice: 20%
+#### Maurice: 25%
 Wrote the CLI for the program. Recorded and wrote the scrum logs.
-#### John: 20%
+#### John: 25%
 Scraped information from spaceweatherlive and NOAA for solar flare activity.
-#### Johnny: 20% 
+#### Johnny: 25% 
 Scraped information about solar weather including: solar wind speeds, density, and temperatures. 
 Wrote tests.
 Dockerized the program and updated README.
