@@ -1,4 +1,7 @@
 # space-data-scraper
+This is a scraper program that scrapes space data from various sources
+such as spaceweatherlive and NOAA. The user can do various things with this data that
+is scraped which are described below in the available commands.
 
 # Running the Program
 To run the program, we provided a Dockerfile which can generate an image in Docker. This will
