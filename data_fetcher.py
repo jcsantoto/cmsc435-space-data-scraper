@@ -112,13 +112,14 @@ class SolarWeatherFetcher:
     """
 
     @staticmethod
-    def fetch_website_data() -> list:
+    def fetch_website_data(url: string) -> list:
         """ Requests the HTML content from the NOAA website containing the data for solar weather in the last 24 hours
-
+        Args:
+            url: the url that we want to fetch
         Returns:
             lst: a list of each minute of solar weather data (time, density, speed, temperature) for the last 24 hours
         """
-        website = requests.get("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")
+        website = requests.get(url)
         content = str(BeautifulSoup(website.content, 'html.parser'))
         lst = ast.literal_eval(content)
 
