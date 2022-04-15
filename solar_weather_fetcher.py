@@ -41,3 +41,32 @@ class SolarWeatherFetcher:
             formatted_str = formatted_str + '\n' + str(data)
 
         return formatted_str
+
+    @staticmethod
+    def _get_solar_wind_data(url: str, col_name: str) -> list:
+        """
+        Pages of data on the NOAA website contain multiple types of numerical data which are grouped into different
+        columns. (i.e. Column 1 is timestamp, Column 2 is density, etc.)
+        This function retrieves the column of data specified by col_nam, so it can be used for plotting.
+        Args:
+            url: The url to the website where the data is located.
+            col_name: The column name of the column of data that is to be used.
+        Returns:
+            A list containing the values retrieved from the column of the data that is specified by col_name
+        """
+        solar_weather_data = SolarWeatherFetcher.fetch_website_data(url)
+        data_size = len(solar_weather_data)
+        plot_data = (data_size - 1) * [0]
+
+        col = solar_weather_data[0].index(col_name)
+
+        if (col_name == "time_tag"):
+            for index in range(1, data_size):
+                plot_data[index - 1] = solar_weather_data[index][col]
+
+        else:
+            for index in range(1, data_size):
+                plot_data[index - 1] = float(solar_weather_data[index][col])
+
+        return plot_data
+
