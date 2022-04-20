@@ -12,18 +12,18 @@
 
          let solar_data = {{ data1 }};
          let time_tag = '{{ data2 }}';
-         let tt = time_tag.replaceAll('&#39;','');
-         let xy  = tt.split(/,/);
+         let tt = time_tag.replaceAll('&#39;','').split(/,/);
+         let dates = new Set();
 
          (function(){
             let ctx = document.getElementById('myChart').getContext('2d');
-            let chart = new Chart(ctx, 
+            let chart = new Chart(ctx,
             {
-               type: 'line', 
+               type: 'line',
                data:{
-                  labels: xy,
+                  labels: tt,
                   datasets:[{
-                     label: 'Temperature',
+                     label: 'Temperature (K)',
                      data: solar_data,
                      borderColor: 'rgb(255, 99, 132)'
 
@@ -37,12 +37,32 @@
                   elements:{
                      point:{
                        radius: 0
-                    } 
+                    }
                   },
                   scales:{
+                     y: {
+                        title: {
+                           display: true,
+                           text: 'Temperature (K)'
+                        }
+                     },
                      x:{
                         maxRotation: 0,
                         autoSkip: true,
+                        ticks: {
+
+                           callback: function(val, index) {
+                              let day = this.getLabelForValue(val).substring(0,11).replace("[", "")
+                              return day
+
+                           },
+                           maxTicksLimit: 7,
+                           autoSkip: true
+                        },
+                        title: {
+                           display: true,
+                           text: 'Date',
+                        }
                      }
                   },
                   animation: false,
