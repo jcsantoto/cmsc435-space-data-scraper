@@ -25,5 +25,13 @@ def speed():
     time =  SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json","time_tag")
     return render_template("test.html",data1=speed, data2=time)
 
+@app.route("/all")
+def all_activities():
+    temperature = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature")
+    density = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "density")
+    speed = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "speed")
+    time =  SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json","time_tag")
+    return render_template("activities.html",temperature=temperature, density=density, speed=speed, time=time)
+
 if __name__ == "__main__":
     app.run(debug=True)
