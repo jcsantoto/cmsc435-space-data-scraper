@@ -12,8 +12,7 @@
 
          let solar_data = {{ data1 }};
          let time_tag = '{{ data2 }}';
-         let tt = time_tag.replaceAll('&#39;','');
-         let xy  = tt.split(/,/);
+         let tt = time_tag.replaceAll('&#39;','').split(/,/);
          let dates = new Set();
 
          (function(){
@@ -22,7 +21,7 @@
             {
                type: 'line',
                data:{
-                  labels: xy,
+                  labels: tt,
                   datasets:[{
                      label: 'Temperature (K)',
                      data: solar_data,
