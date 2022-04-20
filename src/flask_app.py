@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from solar_weather_fetcher import SolarWeatherFetcher
+from src.solar_weather_fetcher import SolarWeatherFetcher
 
 app = Flask(__name__)
 
