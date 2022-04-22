@@ -1,6 +1,6 @@
 import datetime
 import string
-from data_fetcher import SolarWeatherFetcher
+from solar_weather_fetcher import SolarWeatherFetcher
 
 
 class Alerts:
