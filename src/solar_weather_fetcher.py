@@ -18,7 +18,12 @@ class SolarWeatherFetcher:
         """
         website = requests.get(url)
         content = str(BeautifulSoup(website.content, 'html.parser'))
-        lst = ast.literal_eval(content)
+        lst = []
+
+        try:
+            lst = ast.literal_eval(content)
+        except SyntaxError:
+            lst = []
 
         return lst
 
@@ -58,7 +63,8 @@ class SolarWeatherFetcher:
         data_size = len(solar_weather_data)
         plot_data = (data_size - 1) * [0]
 
-        col = solar_weather_data[0].index(col_name)
+        if (data_size > 0):
+            col = solar_weather_data[0].index(col_name)
 
         if (col_name == "time_tag"):
             for index in range(1, data_size):

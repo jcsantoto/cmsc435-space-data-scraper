@@ -1,4 +1,4 @@
-from data_fetcher import DataFetcher
+from src.data_fetcher import DataFetcher
 import unittest
 import datetime
 import requests
