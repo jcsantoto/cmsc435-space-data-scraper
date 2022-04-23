@@ -12,6 +12,7 @@
 
          let solar_data = {{ data1 }};
          let time_tag = '{{ data2 }}';
+         let axis_label = '{{data3}}';
          let tt = time_tag.replaceAll('&#39;','').split(/,/);
          let dates = new Set();
 
@@ -23,7 +24,7 @@
                data:{
                   labels: tt,
                   datasets:[{
-                     label: 'Temperature (K)',
+                     label: axis_label,
                      data: solar_data,
                      borderColor: 'rgb(255, 99, 132)'
 
@@ -43,7 +44,7 @@
                      y: {
                         title: {
                            display: true,
-                           text: 'Temperature (K)'
+                           text: axis_label
                         }
                      },
                      x:{
