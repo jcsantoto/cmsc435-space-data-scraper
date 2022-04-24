@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-   <head>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-      <meta charset="utf-8">
-      <title>CMSC435 Space Data Scraper</title>
-   </head>
-   <body>
+{% extends "template.html" %}
 
+{% block content %}
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
       <canvas id="myChart" width="600" height="400"></canvas>
       <script>
 
@@ -74,12 +70,5 @@
 
          
       </script>
-
-      <h1> Space Data Scraper </h1>
-      <p> Flask is a Fun and easy framework</p>
-      <p> Flask and HTML in python looks cool</p>
-
       
-
-   </body>
-</html>
+{% endblock %}
