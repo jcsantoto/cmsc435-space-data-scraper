@@ -24,7 +24,7 @@ The about tab lists all the sources we scraped our data off of and other general
 #### Abhinav: 15%
 Added a customization feature for what appears on the user's feed. Wrote tests for customization feature.
 #### Derek: 25%
-Created HTML and CSS template for general layout of website. Fixed file parsing. Wrote tests for file parsing. Added layout for community page.
+Created HTML and CSS template for general layout of website. Fixed file parsing. Wrote tests for file parsing. Added layout for community page and help page. Added information to about page and help page.
 #### Maurice: 10%
 Began set up of user login system. (Login system incomplete due to personal issues that came up)
 #### John: 25%
