@@ -13,11 +13,11 @@ To run the tests:
 # Navigating the Website
 First begin by visiting the website listed in the section above. This will take you to the home page.
 From there, there are numerous tabs that will direct you to various information related to space data.
-Currently, the tabs that are supported are the Space Weather tab, feed tab and sources tab. Clicking 
+Currently, the tabs that are currently supported are the Space Weather tab and about tab. Clicking 
 on the space weather tab will direct you to a directory page which has various buttons that lead to different
 graphs. You can click on the buttons to show the graphs you want to see. The feed tab currently
 displays all space weather information all in one place, with further updates to it coming in the future.
-The sources tab lists all the sources we scraped our data off of. 
+The about tab lists all the sources we scraped our data off of. 
 
 # Group Efforts and Tasks
 
