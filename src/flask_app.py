@@ -13,7 +13,7 @@ def home():
 
 @app.route("/wind")
 def solar_wind():
-    return render_template("graphs.html")
+    return render_template("graph.html")
 
 @app.route("/wind/<data>")
 def solar_wind_graphs(data):
@@ -26,7 +26,15 @@ def solar_wind_graphs(data):
     else:
         data1 = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", data)
         time = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "time_tag")
-        return render_template("test.html", data1=data1, data2=time)
+
+        if data == 'temperature':
+            axis = 'Temperature (K)'
+        elif data == 'density':
+            axis = 'Density (1/cm^3)'
+        elif data == 'speed':
+            axis = 'Speed (km/s)'
+
+        return render_template("test.html", data1=data1, data2=time, data3=axis)
 
 if __name__ == "__main__":
     app.run(debug=True)
