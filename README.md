@@ -4,7 +4,7 @@ such as spaceweatherlive and NOAA. The user can do various things with this data
 is scraped, which includes viewing the raw data and viewing them in graphs.
 
 The repository contains several files which contain the backend and frontend for the scraping of these various 
-datasets. The CLI python file is the main program that is interacted with.
+datasets. The flask_app file is the main program that runs the web application. The web application is how you interact with our program.
 # Running the Program
 To use our space data scraper you can visit our website <a href = "http://96.255.219.52/">here</a>
 <br>
