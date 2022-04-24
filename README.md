@@ -8,7 +8,7 @@ datasets. The CLI python file is the main program that is interacted with.
 # Running the Program
 To use our space data scraper you can visit our website <a href = "http://96.255.219.52/">here</a>
 <br>
-To run the tests:
+To run the tests: Tests are run in CI/CD pipeline.
 
 # Navigating the Website
 First begin by visiting the website listed in the section above. This will take you to the home page.
