@@ -36,5 +36,13 @@ def solar_wind_graphs(data):
 
         return render_template("test.html", data1=data1, data2=time, data3=axis)
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/community")
+def community():
+    return render_template("community.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
