@@ -1,4 +1,4 @@
-from file_parser import FileParser
+from src.file_parser import FileParser
 import unittest
 import os
 
