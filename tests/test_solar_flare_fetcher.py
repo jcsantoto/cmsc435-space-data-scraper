@@ -3,7 +3,7 @@ from src.solar_flare_fetcher import SolarFlareFetcherSWL
 import unittest
 
 
-class TestSolarWeatherFetcher(unittest.TestCase):
+class TestSolarFlareFetcher(unittest.TestCase):
     """ Class to contain unit tests for methods in the SolarWeatherFetcher class. """
 
     def test_noaa_get_solar_flare_data_returns_non_empty_data(self):
