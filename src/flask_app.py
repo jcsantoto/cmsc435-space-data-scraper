@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from src.solar_weather_fetcher import SolarWeatherFetcher
+from src.solar_flare_fetcher import SolarFlareFetcherSWL
+from src.solar_flare_fetcher import SolarFlareFetcherNOAA
 
 app = Flask(__name__)
 
@@ -43,6 +45,13 @@ def about():
 @app.route("/community")
 def community():
     return render_template("community.html")
+
+@app.route("/solarflare")
+def solar_flare():
+    swl_data = SolarFlareFetcherSWL.fetch_website_data()
+    noaa_data = SolarFlareFetcherNOAA.fetch_website_data()
+    return render_template("solar_flare.html", data1=swl_data[0], data2=swl_data[1], data3=swl_data[2], data4=noaa_data[0],
+                           data5=swl_data[1], data6=noaa_data[2], data7=noaa_data[3])
 
 if __name__ == "__main__":
     app.run(debug=True)
