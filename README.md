@@ -32,6 +32,6 @@ Created graphs showing last 24 hours of space weather activity and last 7 days o
 backend with frontend. Helped add CI/CD implementation.
 #### Johnny: ?
 Created graphs showing solar wind density and speeds for the last 7 days. Helped connect frontend with backend. Updated README.
-Wrote tests for space_weather_fetcher. Added CI/CD implementation. Added source page and solar flare information.
+Wrote tests for space_weather_fetcher and solar_weather_fetcher. Added CI/CD implementation. Added source page and solar flare information.
 
 
