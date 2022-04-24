@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from src.solar_weather_fetcher import SolarWeatherFetcher
 from src.solar_flare_fetcher import SolarFlareFetcherSWL
 from src.solar_flare_fetcher import SolarFlareFetcherNOAA
+from src.alerts_backend import Alerts
 
 app = Flask(__name__)
 
