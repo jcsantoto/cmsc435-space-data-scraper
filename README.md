@@ -21,16 +21,16 @@ The about tab lists all the sources we scraped our data off of.
 
 # Group Efforts and Tasks
 
-#### Abhinav: ?
-Created feed and added a customization feature for it.
-#### Derek: ?
+#### Abhinav: 15%
+Added a customization feature for what appears on the user's feed. Wrote tests for customization feature.
+#### Derek: 25%
 Created HTML and CSS template for frontend of website. Fixed file parsing. Wrote tests for file parsing.
-#### Maurice: ?
+#### Maurice: 10%
 Began set up of user login system. (Login system incomplete due to personal issues that came up)
-#### John: ?
+#### John: 25%
 Created graphs showing last 24 hours of space weather activity and last 7 days of solar wind temperatures. Worked on connecting
 backend with frontend. Helped add CI/CD implementation.
-#### Johnny: ?
+#### Johnny: 25%
 Created graphs showing solar wind density and speeds for the last 7 days. Helped connect frontend with backend. Updated README.
 Wrote tests for space_weather_fetcher and solar_weather_fetcher. Added CI/CD implementation. Added source page and solar flare information.
 
