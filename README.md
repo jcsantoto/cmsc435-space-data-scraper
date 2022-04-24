@@ -29,9 +29,9 @@ Created HTML and CSS template for frontend of website. Fixed file parsing. Wrote
 Began set up of user login system. (Login system incomplete due to personal issues that came up)
 #### John: ?
 Created graphs showing last 24 hours of space weather activity and last 7 days of solar wind temperatures. Worked on connecting
-backend with frontend.
+backend with frontend. Helped add CI/CD implementation.
 #### Johnny: ?
 Created graphs showing solar wind density and speeds for the last 7 days. Helped connect frontend with backend. Updated README.
-Wrote tests for space_weather_fetcher.
+Wrote tests for space_weather_fetcher. Added CI/CD implementation. Added source page.
 
 
