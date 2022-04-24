@@ -41,6 +41,6 @@ class FileParser:
             nc_data: Data in the netCDF format
         """
         nc_data_filename = FileParser._decompress(compressed_data_filename)
-        nc_data = netCDF4.Dataset(filename=nc_data_filename, mode="r", format="NETCDF3_CLASSIC")
+        nc_data = netCDF4.Dataset(nc_data_filename, "w", format="NETCDF4")
 
         return nc_data
