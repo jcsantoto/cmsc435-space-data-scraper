@@ -47,3 +47,8 @@ test_alerts:
     - pip install beautifulsoup4
     - python -m unittest tests/alerts_tests.py
 
+test_data_fetch:
+    script:
+    - pip install requests
+    - pip install beautifulsoup4
+    - python -m unittest tests/test_data_fetcher.py
