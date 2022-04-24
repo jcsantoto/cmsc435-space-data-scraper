@@ -53,5 +53,27 @@ def solar_flare():
     return render_template("solar_flare.html", data1=swl_data[0], data2=swl_data[1], data3=swl_data[2], data4=noaa_data[0],
                            data5=swl_data[1], data6=noaa_data[2], data7=noaa_data[3])
 
+
+@app.route("/feed/<selection>")
+def feed(selection):
+    al = Alerts()
+    temperature = False
+    speed = False
+    density = False
+
+    selection = int(selection)
+
+    if selection & 1 == 1:
+        temperature = True
+    if (selection >> 1) & 1 == 1:
+        speed = True
+    if (selection >> 2) & 1 == 1:
+        density = True
+
+    al.customize_alerts(density, speed, temperature)
+    response = al.get_custom_alert()
+
+    return render_template("feed.html", response=response)
+
 if __name__ == "__main__":
     app.run(debug=True)
