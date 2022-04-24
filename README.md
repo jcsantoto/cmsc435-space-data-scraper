@@ -13,23 +13,23 @@ To run the tests: Tests are run in CI/CD pipeline.
 # Navigating the Website
 First begin by visiting the website listed in the section above. This will take you to the home page.
 From there, there are numerous tabs that will direct you to various information related to space data.
-Currently, the tabs that are currently supported are the Space Weather tab and about tab. Clicking 
+Currently, the tabs that are currently supported are the Space Weather, about, feed, and solar flare tab. Clicking 
 on the space weather tab will direct you to a directory page which has various buttons that lead to different
 graphs. You can click on the buttons to show the graphs you want to see. The feed tab currently
-displays all space weather information all in one place, with further updates to it coming in the future.
-The about tab lists all the sources we scraped our data off of. 
+displays current space weather information all in one place and allows for customization of what is shown.
+The about tab lists all the sources we scraped our data off of and other general information.
 
 # Group Efforts and Tasks
 
 #### Abhinav: 15%
 Added a customization feature for what appears on the user's feed. Wrote tests for customization feature.
 #### Derek: 25%
-Created HTML and CSS template for frontend of website. Fixed file parsing. Wrote tests for file parsing.
+Created HTML and CSS template for general layout of website. Fixed file parsing. Wrote tests for file parsing. Added layout for community page.
 #### Maurice: 10%
 Began set up of user login system. (Login system incomplete due to personal issues that came up)
 #### John: 25%
 Created graphs showing last 24 hours of space weather activity and last 7 days of solar wind temperatures. Worked on connecting
-backend with frontend. Helped add CI/CD implementation.
+backend with frontend. Helped add CI/CD implementation. Connected space weather feed backend to frontend.
 #### Johnny: 25%
 Created graphs showing solar wind density and speeds for the last 7 days. Helped connect frontend with backend. Updated README.
 Wrote tests for space_weather_fetcher and solar_weather_fetcher. Added CI/CD implementation. Added source page and solar flare information.
