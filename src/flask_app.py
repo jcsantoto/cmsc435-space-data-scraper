@@ -10,13 +10,16 @@ app = Flask(__name__)
 def home():
     return render_template("template.html")
 
+
 #@app.errorhandler(Exception)
 #def error_handler(error):
 #    return ("<h1> That page does not exist. </h1>")
 
+
 @app.route("/wind")
 def solar_wind():
     return render_template("graph.html")
+
 
 @app.route("/wind/<data>")
 def solar_wind_graphs(data):
@@ -39,13 +42,21 @@ def solar_wind_graphs(data):
 
         return render_template("test.html", data1=data1, data2=time, data3=axis)
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
 
+
 @app.route("/community")
 def community():
     return render_template("community.html")
+
+
+@app.route("/help")
+def help():
+    return render_template("help.html")
+
 
 @app.route("/solarflare")
 def solar_flare():
@@ -75,6 +86,7 @@ def feed(selection):
     response = al.get_custom_alert()
 
     return render_template("feed.html", response=response)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
