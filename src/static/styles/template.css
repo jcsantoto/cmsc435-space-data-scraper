@@ -50,3 +50,19 @@ a {
     text-align: center;
     with: 100%;
 }
+
+.communityUploadArea {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.communityUploadCard {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: -5px 5px 5px gray;
+    font-family: sans-serif;
+    width: 50%;
+    height: 200px;
+    margin: 10px auto;
+}
