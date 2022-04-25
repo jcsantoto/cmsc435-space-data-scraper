@@ -16,7 +16,7 @@ From there, there are numerous tabs that will direct you to various information 
 Currently, the tabs that are currently supported are the Space Weather, about, feed, and solar flare tab. Clicking 
 on the space weather tab will direct you to a directory page which has various buttons that lead to different
 graphs. You can click on the buttons to show the graphs you want to see. The feed tab currently
-displays current space weather information all in one place and allows for customization of what is shown.
+displays current space weather information all in one place and allows for customization of what is shown. You can customize the data shown by checking off the boxes.
 The about tab lists all the sources we scraped our data off of and other general information.
 
 # Group Efforts and Tasks
