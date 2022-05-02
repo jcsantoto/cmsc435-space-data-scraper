@@ -20,9 +20,12 @@ class SolarWeatherFetcher:
         content = str(BeautifulSoup(website.content, 'html.parser'))
         lst = []
 
+        content = content.replace('null', "\"0\"")
+        
         try:
             lst = ast.literal_eval(content)
         except SyntaxError:
+            print(content)
             lst = []
 
         return lst
