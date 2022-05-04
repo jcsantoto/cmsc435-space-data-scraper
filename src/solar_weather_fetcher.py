@@ -25,7 +25,7 @@ class SolarWeatherFetcher:
         try:
             lst = ast.literal_eval(content)
         except SyntaxError:
-            print(content)
+            
             lst = []
 
         return lst
