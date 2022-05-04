@@ -1,10 +1,9 @@
-h1 {
+.title-banner h1 {
     text-align: center;
     color: white;
-    background-color: rebeccaPurple;
     font-family:sans-serif;
     width: 100%;
-    padding: 20px;
+    padding: 100px;
     margin: 0px;
 }
 
@@ -40,7 +39,7 @@ a {
     text-color: black
     font-family: sans-serif;
     with: 100%;
-    background: aliceBlue;
+    background: white;
 }
 
 .footer {
@@ -65,4 +64,11 @@ a {
     width: 50%;
     height: 200px;
     margin: 10px auto;
+}
+
+.banner-img img {
+    object-fit: none;
+    object-position: center;
+    width: 100%;
+
 }
