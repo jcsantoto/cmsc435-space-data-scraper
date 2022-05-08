@@ -62,12 +62,12 @@ a {
     box-shadow: -5px 5px 5px gray;
 }
 
-.example-text {
+.page-text {
     font-size: 24pt;
     padding-top: 18%;
 }
 
-.example-row {
+.page-row {
     margin-bottom: 30px;
     padding: 30px;
     box-shadow: -10px 10px 10px gray;
