@@ -35,12 +35,24 @@
                 <li class="nav-item">
                     <a href="/solarflare" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Solar Flares</a>
                 </li>
-                <li class="nav-item">
-                    <a href="/community" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Community</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Login</a>
-                </li>
+                {% if current_user.is_authenticated %}
+                     <li class="nav-item">
+                        <a href="/community" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Community</a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="/logout" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Account</a>
+                    </li>
+                 {% else %}
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Login</a>
+                    </li>
+                 {% endif %}
                 <li class="nav-item">
                     <a href="/help" class="nav-link" onmouseover="setActivePage(this)" onmouseout="setNonActivePage(this)">Help</a>
                 </li>
