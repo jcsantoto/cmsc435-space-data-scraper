@@ -2,16 +2,28 @@
 
 {% block content %}
 
+<div class="container" style="width: 50%">
+        <div class="row page-row">
+                <h3 style="text-align:center; margin-bottom: 30px">Report From NOAA</h3>
 
-        <p id = "SWL">The current solar flare class according to Spaceweatherlive is: </p>
-        <p id = "SWL2">The largest solar flare class in the past 24 hours is: </p>
-        <p id = "SWL3">The largest solar flare class in the past 72 hours is: </p>
-        <br>
-        <p id = "NOAA">The current solar flare class according to NOAA is: </p>
-        <p id = "NOAA2">The solar flare begun as class: </p>
-        <p id = "NOAA3">It peaked at: </p>
-        <p id = "NOAA4">The ended as: </p>
-        <script>
+                <p id = "NOAA">Current solar flare class: </p>
+                <p id = "NOAA2">Began as class </p>
+                <p id = "NOAA3">Peaked at class </p>
+                <p id = "NOAA4">Ended as class </p>
+        </div>
+</div>
+
+<div class="container" style="width: 50%">
+        <div class="row page-row">
+                <h3 style="text-align:center; margin-bottom: 30px">Report From SpaceWeatherLive</h3>
+
+                <p id = "SWL">Current solar flare class: </p>
+                <p id = "SWL2">Largest solar flare class in the past 24 hours: </p>
+                <p id = "SWL3">Largest solar flare class in the past 72 hours: </p>
+        </div>
+</div>
+
+<script>
         let swl_curr = '{{ data1 }}';
         let swl_max = '{{ data2 }}';
         let swl_max_day = '{{ data3 }}';
@@ -26,9 +38,6 @@
         document.getElementById("NOAA2").innerHTML += noaa_began;
         document.getElementById("NOAA3").innerHTML += noaa_peak;
         document.getElementById("NOAA4").innerHTML += noaa_end;
-        </script>
-
-
-
+</script>
 
 {% endblock %}

@@ -1,11 +1,11 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
-from solar_weather_fetcher import SolarWeatherFetcher
-from solar_flare_fetcher import SolarFlareFetcherSWL
-from solar_flare_fetcher import SolarFlareFetcherNOAA
-from alerts_backend import Alerts
+from src.solar_weather_fetcher import SolarWeatherFetcher
+from src.solar_flare_fetcher import SolarFlareFetcherSWL
+from src.solar_flare_fetcher import SolarFlareFetcherNOAA
+from src.alerts_backend import Alerts
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-import forms
+import src.forms
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
 
@@ -60,29 +60,36 @@ def home():
 
 @app.route("/wind")
 def solar_wind():
-    return render_template("graph.html")
+    temperature_daily = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature"
+    )
+    density_daily = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "density"
+    )
+    speed_daily = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "speed"
+    )
+    time_daily = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "time_tag"
+    )
 
+    temperature_weekly = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "temperature"
+    )
+    density_weekly = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "density"
+    )
+    speed_weekly = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "speed"
+    )
+    time_weekly = SolarWeatherFetcher._get_solar_wind_data(
+        "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "time_tag"
+    )
 
-@app.route("/wind/<data>")
-def solar_wind_graphs(data):
-    if(data == "all"):
-        temperature = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature")
-        density = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "density")
-        speed = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "speed")
-        time = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "time_tag")
-        return render_template("activities.html", temperature=temperature, density=density, speed=speed, time=time)
-    else:
-        data1 = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", data)
-        time = SolarWeatherFetcher._get_solar_wind_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "time_tag")
-
-        if data == 'temperature':
-            axis = 'Temperature (K)'
-        elif data == 'density':
-            axis = 'Density (1/cm^3)'
-        elif data == 'speed':
-            axis = 'Speed (km/s)'
-
-        return render_template("test.html", data1=data1, data2=time, data3=axis)
+    return render_template("graph.html", temperature_daily=temperature_daily, density_daily=density_daily,
+                           speed_daily=speed_daily, time_daily=time_daily, temperature_weekly=temperature_weekly,
+                           density_weekly=density_weekly, speed_weekly=speed_weekly, time_weekly=time_weekly
+                           )
 
 
 @app.route("/about")
@@ -148,7 +155,7 @@ def solar_flare():
     swl_data = SolarFlareFetcherSWL.fetch_website_data()
     noaa_data = SolarFlareFetcherNOAA.fetch_website_data()
     return render_template("solar_flare.html", data1=swl_data[0], data2=swl_data[1], data3=swl_data[2], data4=noaa_data[0],
-                           data5=swl_data[1], data6=noaa_data[2], data7=noaa_data[3])
+                           data5=noaa_data[1], data6=noaa_data[2], data7=noaa_data[3])
 
 
 @app.route("/feed/<selection>")
