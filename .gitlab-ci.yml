@@ -51,3 +51,8 @@ test_data_fetch:
     - pip install requests
     - pip install beautifulsoup4
     - python -m unittest tests/test_data_fetcher.py
+
+coverage:
+  script:
+  - pip install pytest-cov
+  - python -m pytest --cov-report term-missing --cov=project
