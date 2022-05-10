@@ -62,5 +62,7 @@ test_weather_stat:
 
 coverage:
   script:
+  - pip install numpy
+  - pip install sklearn
   - pip install pytest-cov
   - python -m pytest --cov-report term-missing --cov=src
