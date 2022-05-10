@@ -1,3 +1,6 @@
+[![coverage report](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/main/coverage.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/main)
+[![pipeline status](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/main/pipeline.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/main)
+
 # space-data-scraper
 This is a scraper program that scrapes space data from various sources
 such as spaceweatherlive and NOAA. The user can do various things with this data that
