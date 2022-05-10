@@ -1,5 +1,5 @@
-[![coverage report](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/codeCoverage/coverage.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/codeCoverage)
-[![pipeline status](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/codeCoverage/pipeline.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/codeCoverage)
+[![coverage report](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/develop/coverage.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/codeCoverage)
+[![pipeline status](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/badges/develop/pipeline.svg)](https://cmsc435.garrettvanhoy.com/jsantoto/space-data-scraper/-/commits/codeCoverage)
 
 # space-data-scraper
 This is a scraper program that scrapes space data from various sources
