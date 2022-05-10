@@ -48,6 +48,9 @@ class Alerts:
         elif current_hour >= 12:
             am_or_pm = " pm"
 
+        if len(str(current_minute)) == 1:
+            current_minute = "0" + str(current_minute)
+
         return_string = "As of " + str(current_month) + " " + str(current_day) + ", " + str(current_year) + " at "
         return_string = return_string + str(current_hour) + ":" + str(current_minute) + " " + am_or_pm
         return_string = return_string + " Greenwich Mean Time, the current weather in space is:" + '<br>'
@@ -138,5 +141,25 @@ class Alerts:
             self.density_threshold) + "<br>" + \
                         "Solar Wind Speed:" + str(self.wind_threshold) + "<br> Solar Wind Temperature: " + str(self.temperature_threshold) \
                         + "<br><br>" + return_string
+
+        return return_string
+
+    @staticmethod
+    def get_warning():
+
+        current_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")[-1]
+        solar_density = current_data[1]
+        solar_wind = current_data[2]
+        solar_temperature = current_data[3]
+
+        return_string = ""
+        if float(solar_density) >= 20:
+            return_string = "Solar Wind Density is currently at " + solar_density + "(1/cm^3), which can cause a geomagnetic storm."
+        if float(solar_wind) >= 550:
+            return_string = "Solar Wind Speed is currently at " + solar_wind + "(km/s), which can cause a satelitte to go out of orbit."
+        if float(solar_temperature) >= 1000000:
+            return_string = "Solar Wind Temperature is currently at " + solar_temperature + "(K), which may affect satelitte functionality."
+        if return_string.__eq__(""):
+            return_string = "Solar Weather conditions are safe for satelittes!"
 
         return return_string
