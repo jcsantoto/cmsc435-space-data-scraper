@@ -2,11 +2,11 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from src.solar_weather_fetcher import SolarWeatherFetcher
 from src.solar_flare_fetcher import SolarFlareFetcherSWL
 from src.solar_flare_fetcher import SolarFlareFetcherNOAA
-from src.solar_weather_stat import SolarWeatherStat
 from src.alerts_backend import Alerts
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 import src.forms
+import src.solar_weather_stat
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
 
@@ -62,11 +62,6 @@ def home():
 @app.route("/wind")
 def solar_wind():
 
-    solar_wind_stat = SolarWeatherStat("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")
-    temp_stat = solar_wind_stat.get_all("temperature")
-    speed_stat = solar_wind_stat.get_all("speed")
-    density_stat = solar_wind_stat.get_all("density")
-
     temperature_daily = SolarWeatherFetcher._get_solar_wind_data(
         "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature"
     )
@@ -92,6 +87,10 @@ def solar_wind():
     time_weekly = SolarWeatherFetcher._get_solar_wind_data(
         "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json", "time_tag"
     )
+
+    temp_stat = solar_weather_stat.get_all(temperature_daily)
+    speed_stat = solar_weather_stat.get_all(speed_daily)
+    density_stat = solar_weather_stat.get_all(density_daily)
 
     return render_template("graph.html", temperature_daily=temperature_daily, density_daily=density_daily,
                            speed_daily=speed_daily, time_daily=time_daily, temperature_weekly=temperature_weekly,
