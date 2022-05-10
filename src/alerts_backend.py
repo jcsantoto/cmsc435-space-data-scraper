@@ -9,11 +9,13 @@ class Alerts:
         self.density = True
         self.wind = True
         self.temperature = True
+        self.sunspot = True
 
-    def customize_alerts(self, custom_density, custom_wind, custom_temperature):
+    def customize_alerts(self, custom_density, custom_wind, custom_temperature, custom_sunspot):
         self.density = custom_density
         self.wind = custom_wind
         self.temperature = custom_temperature
+        self.sunspot = custom_sunspot
 
     def get_custom_alert(self):
 
@@ -21,6 +23,9 @@ class Alerts:
         solar_density = current_data[1]
         solar_wind = current_data[2]
         solar_temperature = current_data[3]
+
+        sunspot_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/json/sunspot_report.json")
+        total_sunspot = sunspot_data[0]["Numspot"] + sunspot_data[1]["Numspot"] + sunspot_data[3]["Numspot"]
 
         current_time = datetime.datetime.strptime(current_data[0], "%Y-%m-%d %H:%M:%S.%f")
         current_year = current_time.year
@@ -44,6 +49,8 @@ class Alerts:
             return_string = return_string + "Solar Wind Speed: " + solar_wind + " (km/s)" + '\n'
         if self.temperature:
             return_string = return_string + "Solar Wind Temperature: " + solar_temperature + " (K)" + '\n'
+        if self.sunspot:
+            return_string = return_string + "Sunspot Number: " + str(total_sunspot) + ' \n'
 
         return return_string
 
@@ -54,6 +61,9 @@ class Alerts:
         solar_density = current_data[1]
         solar_wind = current_data[2]
         solar_temperature = current_data[3]
+
+        sunspot_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/json/sunspot_report.json")
+        total_sunspot = sunspot_data[0]["Numspot"] + sunspot_data[1]["Numspot"] + sunspot_data[3]["Numspot"]
 
         current_time = datetime.datetime.strptime(current_data[0], "%Y-%m-%d %H:%M:%S.%f")
         current_year = current_time.year
@@ -74,5 +84,6 @@ class Alerts:
         return_string = return_string + "Solar Wind Density: " + solar_density + " (1/cm^3)" + '\n'
         return_string = return_string + "Solar Wind Speed: " + solar_wind + " (km/s)" + '\n'
         return_string = return_string + "Solar Wind Temperature: " + solar_temperature + " (K)" + '\n'
+        return_string = return_string + "Sunspot Number: " + str(total_sunspot) + ' \n'
 
         return return_string

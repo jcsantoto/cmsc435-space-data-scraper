@@ -17,67 +17,84 @@ class AlertsTestCase(unittest.TestCase):
 
     def test_custom_alert_no_alert(self):
         account = Alerts()
-        account.customize_alerts(False, False, False)
+        account.customize_alerts(False, False, False, False)
         custom_string = account.get_custom_alert()
         self.assertFalse("Density" in custom_string)
         self.assertFalse("Speed" in custom_string)
         self.assertFalse("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_density(self):
         account = Alerts()
-        account.customize_alerts(True, False, False)
+        account.customize_alerts(True, False, False, False)
         custom_string = account.get_custom_alert()
         self.assertTrue("Density" in custom_string)
         self.assertFalse("Speed" in custom_string)
         self.assertFalse("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_speed(self):
         account = Alerts()
-        account.customize_alerts(False, True, False)
+        account.customize_alerts(False, True, False, False)
         custom_string = account.get_custom_alert()
         self.assertFalse("Density" in custom_string)
         self.assertTrue("Speed" in custom_string)
         self.assertFalse("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_temperature(self):
         account = Alerts()
-        account.customize_alerts(False, False, True)
+        account.customize_alerts(False, False, True, False)
         custom_string = account.get_custom_alert()
         self.assertFalse("Density" in custom_string)
         self.assertFalse("Speed" in custom_string)
         self.assertTrue("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
+
+    def test_custom_alert_sunspot(self):
+        account = Alerts()
+        account.customize_alerts(False, False, False, True)
+        custom_string = account.get_custom_alert()
+        self.assertFalse("Density" in custom_string)
+        self.assertFalse("Speed" in custom_string)
+        self.assertFalse("Temperature" in custom_string)
+        self.assertTrue("Sunspot" in custom_string)
 
     def test_custom_alert_density_and_speed(self):
         account = Alerts()
-        account.customize_alerts(True, True, False)
+        account.customize_alerts(True, True, False, False)
         custom_string = account.get_custom_alert()
         self.assertTrue("Density" in custom_string)
         self.assertTrue("Speed" in custom_string)
         self.assertFalse("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_density_and_temperature(self):
         account = Alerts()
-        account.customize_alerts(True, False, True)
+        account.customize_alerts(True, False, True, False)
         custom_string = account.get_custom_alert()
         self.assertTrue("Density" in custom_string)
         self.assertFalse("Speed" in custom_string)
         self.assertTrue("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_speed_and_temperature(self):
         account = Alerts()
-        account.customize_alerts(False, True, True)
+        account.customize_alerts(False, True, True, False)
         custom_string = account.get_custom_alert()
         self.assertFalse("Density" in custom_string)
         self.assertTrue("Speed" in custom_string)
         self.assertTrue("Temperature" in custom_string)
+        self.assertFalse("Sunspot" in custom_string)
 
     def test_custom_alert_all_alerts(self):
         account = Alerts()
-        account.customize_alerts(True, True, True)
+        account.customize_alerts(True, True, True, True)
         custom_string = account.get_custom_alert()
         self.assertTrue("Density" in custom_string)
         self.assertTrue("Speed" in custom_string)
         self.assertTrue("Temperature" in custom_string)
+        self.assertTrue("Sunspot" in custom_string)
 
     def test_custom_alert_initially_same_get_alert(self):
         account = Alerts()
@@ -86,7 +103,7 @@ class AlertsTestCase(unittest.TestCase):
 
     def test_custom_can_be_different_than_get_alert(self):
         account = Alerts()
-        account.customize_alerts(False, True, True)
+        account.customize_alerts(False, True, True, False)
         custom_string = account.get_custom_alert()
         self.assertNotEqual(custom_string, Alerts.get_alert())
 

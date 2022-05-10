@@ -182,6 +182,7 @@ def feed(selection):
     temperature = False
     speed = False
     density = False
+    sunspot = False
 
     selection = int(selection)
 
@@ -191,8 +192,10 @@ def feed(selection):
         speed = True
     if (selection >> 2) & 1 == 1:
         density = True
+    if (selection >> 3) & 1 == 1:
+        sunspot = True
 
-    al.customize_alerts(density, speed, temperature)
+    al.customize_alerts(density, speed, temperature, sunspot)
     response = al.get_custom_alert()
 
     return render_template("feed.html", response=response)
