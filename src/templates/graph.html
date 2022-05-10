@@ -4,6 +4,55 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
+<div class="container">
+    <div class="row page-row">
+        <h3> 24-Hour Summary </h3>
+            <p class="article-content">
+                The minimum solar wind speed in the past 24 hours was
+                <b>{{ speed_stat[0] }} km/s</b> and reached a maximum of
+                <b>{{ speed_stat[1] }} km/s</b>. It averaged at
+                <b>{{ speed_stat[2] }} km/s</b>
+                <br>
+                {% if speed_stat[3] >=0 %}
+                    The speed is expected to <b>increase</b>
+                {% else %}
+                    The speed is expected to <b>decrease</b>
+                {% endif %}
+                 at a rate of <b>{{ speed_stat[3]|abs }} km/s</b> per minute
+
+            </p>
+            <p class="article-content">
+                The minimum solar wind density in the past 24 hours was
+                <b>{{ density_stat[0] }} 1/cm<sup>3</sup></b> and reached a maximum of
+                <b>{{ density_stat[1] }} 1/cm<sup>3</sup></b>. It averaged at
+                <b>{{ density_stat[2] }} 1/cm<sup>3</sup></b>.
+                <br>
+                {% if speed_stat[3] >=0 %}
+                    The density is expected to <b>increase</b>
+                {% else %}
+                    The density is expected to <b>decrease</b>
+                {% endif %}
+                 at a rate of <b>{{ density_stat[3]|abs }}1/cm<sup>3</sup></b> per minute
+            </p>
+
+            <p class="article-content">
+                The minimum solar wind temperature in the past 24 hours was
+                <b>{{ temp_stat[0] }} K</b> and reached a maximum of
+                <b>{{ temp_stat[1] }} K</b>. It averaged at
+                <b>{{ temp_stat[2] }} K</b>.
+                <br>
+                {% if speed_stat[3] >=0 %}
+                    The density is expected to <b>increase</b>
+                {% else %}
+                    The density is expected to <b>decrease</b>
+                {% endif %}
+                 at a rate of <b>{{ temp_stat[3]|abs }} K</b> per minute
+            </p>
+
+
+    </div>
+</div>
+
 <!--        <h3>Graphs Showing Solar Wind Activity (Last 24 Hours)</h3>-->
 <!--        <button type="button" onclick="location.href = 'wind/all'">All Activities</button>-->
 
