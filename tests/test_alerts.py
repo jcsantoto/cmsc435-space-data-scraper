@@ -96,11 +96,6 @@ class AlertsTestCase(unittest.TestCase):
         self.assertTrue("Temperature" in custom_string)
         self.assertTrue("Sunspot" in custom_string)
 
-    def test_custom_alert_initially_same_get_alert(self):
-        account = Alerts()
-        custom_string = account.get_custom_alert()
-        self.assertEqual(custom_string, Alerts.get_alert())
-
     def test_custom_can_be_different_than_get_alert(self):
         account = Alerts()
         account.customize_alerts(False, True, True, False)

@@ -19,7 +19,7 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
-
+al = Alerts()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -33,6 +33,13 @@ class User(db.Model, UserMixin):
     biography = db.Column(db.String(240), nullable=False, default='Nothing in your bio')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+    display_temp = db.Column(db.Integer, default=1)
+    display_dens = db.Column(db.Integer, default=1)
+    display_speed = db.Column(db.Integer, default=1)
+    display_sunspot = db.Column (db.Integer, default=1)
+    thres_temp = db.Column(db.Float, default=float('inf'))
+    thres_dens = db.Column(db.Float, default=float('inf'))
+    thres_speed = db.Column(db.Float, default=float('inf'))
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.biography}')"
@@ -134,6 +141,9 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            global al
+            al.customize_alerts(user.display_dens, user.display_speed, user.display_temp, user.display_sunspot)
+            al.customize_thresholds(user.thres_dens, user.thres_speed, user.thres_temp)
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -143,6 +153,8 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
+    global al
+    al = Alerts()
     return redirect(url_for('home'))
 
 
@@ -178,28 +190,60 @@ def solar_flare():
 
 @app.route("/feed/<selection>")
 def feed(selection):
-    al = Alerts()
-    temperature = False
-    speed = False
-    density = False
-    sunspot = False
-
-    selection = int(selection)
-
-    if selection & 1 == 1:
-        temperature = True
-    if (selection >> 1) & 1 == 1:
-        speed = True
-    if (selection >> 2) & 1 == 1:
-        density = True
-    if (selection >> 3) & 1 == 1:
-        sunspot = True
-
-    al.customize_alerts(density, speed, temperature, sunspot)
     response = al.get_custom_alert()
 
     return render_template("feed.html", response=response)
 
 
+@app.route("/customAlert")
+def custom_alert():
+    return al.get_custom_alert()
+
+
+@app.route("/getSelection", methods=['POST'])
+def get_selection():
+    data = request.get_json()
+
+    user = User.query.filter_by(id=current_user.id).first()
+
+    user.display_dens = data['density']
+    user.display_speed = data['speed']
+    user.display_temp = data['temperature']
+    user.display_sunspot = data['sunspot']
+    db.session.add(user)
+    db.session.commit()
+
+    al.customize_alerts(data['density'], data['speed'], data['temperature'], data['sunspot'])
+    return al.get_custom_alert()
+
+@app.route("/thresholdAlert")
+def threshold_alert():
+
+    return al.get_threshold_alert()
+
+@app.route("/getThreshold", methods=['POST'])
+def get_threshold():
+    data = request.get_json()
+
+    if data['density'] is None:
+        data['density'] = 0
+    if data['speed'] is None:
+        data['speed'] = 0
+    if data['temperature'] is None:
+        data['temperature'] = 0
+
+    user = User.query.filter_by(id=current_user.id).first()
+
+    user.thres_dens = data['density']
+    user.thres_speed = data['speed']
+    user.thres_temp = data['temperature']
+    db.session.add(user)
+    db.session.commit()
+
+    al.customize_thresholds(data['density'], data['speed'], data['temperature'])
+
+    return al.get_threshold_alert()
+
 if __name__ == "__main__":
     app.run(debug=True)
+
