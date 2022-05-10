@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from src.solar_weather_fetcher import SolarWeatherFetcher
 from src.solar_flare_fetcher import SolarFlareFetcherSWL
 from src.solar_flare_fetcher import SolarFlareFetcherNOAA
+from src.solar_weather_stat import SolarWeatherStat
 from src.alerts_backend import Alerts
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
@@ -60,6 +61,12 @@ def home():
 
 @app.route("/wind")
 def solar_wind():
+
+    solar_wind_stat = SolarWeatherStat("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")
+    temp_stat = solar_wind_stat.get_all("temperature")
+    speed_stat = solar_wind_stat.get_all("speed")
+    density_stat = solar_wind_stat.get_all("density")
+
     temperature_daily = SolarWeatherFetcher._get_solar_wind_data(
         "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature"
     )
@@ -88,7 +95,8 @@ def solar_wind():
 
     return render_template("graph.html", temperature_daily=temperature_daily, density_daily=density_daily,
                            speed_daily=speed_daily, time_daily=time_daily, temperature_weekly=temperature_weekly,
-                           density_weekly=density_weekly, speed_weekly=speed_weekly, time_weekly=time_weekly
+                           density_weekly=density_weekly, speed_weekly=speed_weekly, time_weekly=time_weekly,
+                           temp_stat=temp_stat, speed_stat=speed_stat, density_stat=density_stat
                            )
 
 
