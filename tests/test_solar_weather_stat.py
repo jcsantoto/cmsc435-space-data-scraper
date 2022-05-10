@@ -1,4 +1,4 @@
-import src.solar_weather_stat
+import src.solar_weather_stat as solar_weather_stat
 import unittest
 
 class TestSolarFlareFetcher(unittest.TestCase):
