@@ -44,7 +44,7 @@ test_alerts:
     script:
     - pip install requests
     - pip install beautifulsoup4
-    - python -m unittest tests/alerts_tests.py
+    - python -m unittest tests/test_alerts.py
 
 test_data_fetch:
     script:
@@ -55,4 +55,4 @@ test_data_fetch:
 coverage:
   script:
   - pip install pytest-cov
-  - python -m pytest --cov-report term-missing --cov=project
+  - python -m pytest --cov-report term-missing --cov=src
