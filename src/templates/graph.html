@@ -27,7 +27,7 @@
                 <b>{{ density_stat[1] }} 1/cm<sup>3</sup></b>. It averaged at
                 <b>{{ density_stat[2] }} 1/cm<sup>3</sup></b>.
                 <br>
-                {% if speed_stat[3] >=0 %}
+                {% if density_stat[3] >=0 %}
                     The density is expected to <b>increase</b>
                 {% else %}
                     The density is expected to <b>decrease</b>
@@ -41,10 +41,10 @@
                 <b>{{ temp_stat[1] }} K</b>. It averaged at
                 <b>{{ temp_stat[2] }} K</b>.
                 <br>
-                {% if speed_stat[3] >=0 %}
-                    The density is expected to <b>increase</b>
+                {% if temp_stat[3] >=0 %}
+                    The temperature is expected to <b>increase</b>
                 {% else %}
-                    The density is expected to <b>decrease</b>
+                    The temperature is expected to <b>decrease</b>
                 {% endif %}
                  at a rate of <b>{{ temp_stat[3]|abs }} K</b> per minute
             </p>
