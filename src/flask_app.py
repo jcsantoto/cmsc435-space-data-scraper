@@ -40,7 +40,8 @@ class User(db.Model, UserMixin):
     thres_temp = db.Column(db.Float, default=float('inf'))
     thres_dens = db.Column(db.Float, default=float('inf'))
     thres_speed = db.Column(db.Float, default=float('inf'))
-
+    post_history = db.Column(db.String(30), default="")
+    
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.biography}')"
 
@@ -198,6 +199,20 @@ def account():
         form.biography.data = current_user.biography
     return render_template('account.html', title='Account', form=form)
 
+@app.route("/history")
+@login_required
+def history():
+    user = User.query.filter_by(id=current_user.id).first()
+    user_history = user.post_history.split(",")
+
+    posts = []
+
+    for i in range(len(user_history)):
+        p = Post.query.filter_by(id=user_history[i]).first()
+        u = User.query.filter_by(id=p.user_id).first()
+        posts.append({"title": p.title, "poster": u.username, "id": p.id, "content": p.content})
+
+    return render_template('history.html', history=posts)
 
 @app.route("/help")
 def help():
