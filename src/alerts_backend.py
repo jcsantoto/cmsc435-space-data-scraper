@@ -15,17 +15,33 @@ class Alerts:
         self.temperature_threshold = 0
 
     def customize_alerts(self, custom_density, custom_wind, custom_temperature, custom_sunspot):
+        """ Allows user to customize alerts to show various weather attributes
+                Args:
+                    custom_density: user input to show or not show density
+                    custom_wind: user input to show or not show wind
+                    custom_temperature: user input to show or not show temperature
+                    custom_sunspot: user input to show or not show sunspot
+        """
         self.density = custom_density
         self.wind = custom_wind
         self.temperature = custom_temperature
         self.sunspot = custom_sunspot
 
     def customize_thresholds(self, custom_density, custom_wind, custom_temperature):
+        """ Allows user to customize thresholds to show various weather attributes
+                    Args:
+                        custom_density: user input for density threshold
+                        custom_wind: user input for wind threshold
+                        custom_temperature: user input for temperature threshold
+        """
         self.density_threshold = custom_density
         self.wind_threshold = custom_wind
         self.temperature_threshold = custom_temperature
 
     def get_custom_alert(self):
+        """
+        Shows general information about solar weather which is based off the user's custom settings on what to show
+        """
 
         current_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")[-1]
         solar_density = current_data[1]
@@ -65,9 +81,12 @@ class Alerts:
 
         return return_string
 
+
     @staticmethod
     def get_alert():
-
+        """
+            Obsolete method
+        """
         current_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")[-1]
         solar_density = current_data[1]
         solar_wind = current_data[2]
@@ -99,7 +118,11 @@ class Alerts:
 
         return return_string
 
+
     def get_threshold_alert(self):
+        """
+            Shows information about solar weather which is based off the user's custom threshold settings
+        """
 
         current_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")[-1]
         solar_density = current_data[1]
@@ -139,13 +162,17 @@ class Alerts:
 
         return_string = "Your current thresholds: <br>" + "Solar Wind Density: " + str(
             self.density_threshold) + "<br>" + \
-                        "Solar Wind Speed:" + str(self.wind_threshold) + "<br> Solar Wind Temperature: " + str(self.temperature_threshold) \
+                        "Solar Wind Speed:" + str(self.wind_threshold) + "<br> Solar Wind Temperature: " + str(
+            self.temperature_threshold) \
                         + "<br><br>" + return_string
 
         return return_string
 
     @staticmethod
     def get_warning():
+        """
+            Shows information about dangerous solar weather conditions if thresholds are met
+        """
 
         current_data = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json")[-1]
         solar_density = current_data[1]

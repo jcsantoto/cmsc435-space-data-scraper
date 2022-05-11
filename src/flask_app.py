@@ -10,7 +10,6 @@ import src.solar_weather_stat
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -20,6 +19,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 al = Alerts()
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -36,7 +36,7 @@ class User(db.Model, UserMixin):
     display_temp = db.Column(db.Integer, default=1)
     display_dens = db.Column(db.Integer, default=1)
     display_speed = db.Column(db.Integer, default=1)
-    display_sunspot = db.Column (db.Integer, default=1)
+    display_sunspot = db.Column(db.Integer, default=1)
     thres_temp = db.Column(db.Float, default=float('inf'))
     thres_dens = db.Column(db.Float, default=float('inf'))
     thres_speed = db.Column(db.Float, default=float('inf'))
@@ -58,17 +58,22 @@ class Post(db.Model):
 
 @app.route("/")
 def home():
+    """
+        generates home page html
+    """
     return render_template("index.html")
 
 
-#@app.errorhandler(Exception)
-#def error_handler(error):
+# @app.errorhandler(Exception)
+# def error_handler(error):
 #    return ("<h1> That page does not exist. </h1>")
 
 
 @app.route("/wind")
 def solar_wind():
-
+    """
+            generates solar wind page html
+    """
     temperature_daily = SolarWeatherFetcher._get_solar_wind_data(
         "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-day.json", "temperature"
     )
@@ -108,16 +113,25 @@ def solar_wind():
 
 @app.route("/about")
 def about():
+    """
+            generates about page html
+    """
     return render_template("about.html")
 
 
 @app.route("/community")
 def community():
+    """
+            generates community page html
+    """
     return render_template("community.html")
 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    """
+        generates home page html and validates user's registration, adding them to the database
+    """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = forms.RegistrationForm()
@@ -133,6 +147,9 @@ def register():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    """
+            generates login page html and validates user login information with the database
+    """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = forms.LoginForm()
@@ -152,6 +169,10 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """
+        logs the user out
+    """
+
     logout_user()
     global al
     al = Alerts()
@@ -161,6 +182,9 @@ def logout():
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    """
+         generates account page html and allows the user to update their account information.
+    """
     form = forms.UpdateAccountForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -177,19 +201,29 @@ def account():
 
 @app.route("/help")
 def help():
+    """
+            generates help page html
+    """
     return render_template("help.html")
 
 
 @app.route("/solarflare")
 def solar_flare():
+    """
+            generates solar flare page html
+    """
     swl_data = SolarFlareFetcherSWL.fetch_website_data()
     noaa_data = SolarFlareFetcherNOAA.fetch_website_data()
-    return render_template("solar_flare.html", data1=swl_data[0], data2=swl_data[1], data3=swl_data[2], data4=noaa_data[0],
+    return render_template("solar_flare.html", data1=swl_data[0], data2=swl_data[1], data3=swl_data[2],
+                           data4=noaa_data[0],
                            data5=noaa_data[1], data6=noaa_data[2], data7=noaa_data[3])
 
 
 @app.route("/feed/<selection>")
 def feed(selection):
+    """
+            generates feed page html
+    """
     response = al.get_custom_alert()
 
     return render_template("feed.html", response=response)
@@ -197,11 +231,17 @@ def feed(selection):
 
 @app.route("/customAlert")
 def custom_alert():
+    """
+        sends custom alert to feed
+    """
     return al.get_custom_alert()
 
 
 @app.route("/getSelection", methods=['POST'])
 def get_selection():
+    """
+         Updates the database with the user's preferences on which solar weather attributes to display
+    """
     data = request.get_json()
 
     user = User.query.filter_by(id=current_user.id).first()
@@ -216,18 +256,29 @@ def get_selection():
     al.customize_alerts(data['density'], data['speed'], data['temperature'], data['sunspot'])
     return al.get_custom_alert()
 
+
 @app.route("/thresholdAlert")
 def threshold_alert():
-
+    """
+            sends custom threshold alerts to feed
+    """
     return al.get_threshold_alert()
+
 
 @app.route("/warningAlert")
 def warning_alert():
+    """
+            sends warning alerts to feed
+    """
 
     return al.get_warning()
 
+
 @app.route("/getThreshold", methods=['POST'])
 def get_threshold():
+    """
+        Updates the database with the user's preferences on solar weather thresholds
+    """
     data = request.get_json()
 
     if data['density'] is None:
@@ -248,6 +299,7 @@ def get_threshold():
     al.customize_thresholds(data['density'], data['speed'], data['temperature'])
 
     return al.get_threshold_alert()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
