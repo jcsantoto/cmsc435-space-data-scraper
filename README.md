@@ -15,26 +15,33 @@ To run the tests: Tests are run in CI/CD pipeline.
 
 # Navigating the Website
 First begin by visiting the website listed in the section above. This will take you to the home page.
-From there, there are numerous tabs that will direct you to various information related to space data.
-Currently, the tabs that are currently supported are the Space Weather, about, feed, and solar flare tab. Clicking 
-on the space weather tab will direct you to a directory page which has various buttons that lead to different
-graphs. You can click on the buttons to show the graphs you want to see. The feed tab currently
-displays current space weather information all in one place and allows for customization of what is shown. You can customize the data shown by checking off the boxes.
-The about tab lists all the sources we scraped our data off of and other general information.
+From there, there are numerous tabs you can visit which are described below:
+* Home: Brief overview of website functionality
+* Feed: Live updated (updated approximately every minute with the latest available data from NOAA) space weather data is shown here. You must log in to be able to customize the thresholds and data displayed.
+* About: Displays general information about the website including sources of the data
+* Solar Wind: Displays graphs of solar weather activity along with a 24 hour summary of this activity.
+* Solar Flares: Displays information about solar flares
+* Register: You can register for an account here
+* Login: You can login to your account here
+* Help: You can get help for using the website here <br>
+<b>TABS BELOW REQUIRE LOGIN</b>
+* Account: Update your account information here
+* Community: See what other users have posted on the website <br>
+* History: See community posts that you have looked at previously
 
 # Group Efforts and Tasks
 
-#### Abhinav: 15%
-Added a customization feature for what appears on the user's feed. Wrote tests for customization feature. Wrote backend for following users.
-#### Derek: 25%
-Created HTML and CSS template for general layout of website. Fixed file parsing. Wrote tests for file parsing. Added layout for community page and help page. Added information to about page and help page.
-#### Maurice: 10%
-Began set up of user login system. (Login system incomplete due to personal issues that came up)
-#### John: 25%
-Created graphs showing last 24 hours of space weather activity and last 7 days of solar wind temperatures. Worked on connecting
-backend with frontend. Helped add CI/CD implementation. Connected space weather feed backend to frontend.
-#### Johnny: 25%
-Created graphs showing solar wind density and speeds for the last 7 days. Helped connect frontend with backend. Updated README.
-Wrote tests for space_weather_fetcher and solar_weather_fetcher. Added CI/CD implementation. Added source page and solar flare information.
-
+#### Abhinav: 16%
+Added backend code for determining dangerous satellite conditions. Added tab in feed to display these dangerous satellite conditions.
+#### Derek: 21%
+Designed better page and content layouts. Used BootStrap to make all pages have better styling so that it is easier to look at. Made navigation to pages more intuitive. Added community page.
+#### Maurice: 21%
+Added login and registration functionality. Created accounts page and added functionality for updating user info. Added code coverage and test coverage badge. Wrote sphinx documentation
+#### John: 21%
+Scraped sunspot number data and displayed in feed. Created a class to calculate statistics for solar wind activity. 
+Used that class to display a 24 hour summary for solar wind. Wrote tests for solar_wind_stat class. Added space weather alert announcements to the top of the feed. Added post history.
+#### Johnny: 21%
+Added AJAX to the website in order to display live data updates without the page needing to be refreshed. Added feed options for adding
+thresholds for solar weather data to display. Integrated feed customization options with user database.
+Updated README.
 
