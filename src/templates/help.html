@@ -2,23 +2,30 @@
 
 {% block content %}
 
-<div style="margin: 50px 100px 100px 100px; font-family: sans-serif">
-        <p>
-                To view a source of data, start by selecting one of the categories from the top navigation bar:
-        </p>
-        <p>
-                <img src="{{url_for('static', filename='nav-bar-screenshot.png')}}">
-        </p>
+<div class="container">
+        <div class="page-row">
+                <div style="font-family: sans-serif">
+                        <p>
+                                To view a source of data, start by selecting one of the categories from the top navigation bar:
+                        </p>
+                        <p>
+                                <div class="container example-img">
+                                    <img src="{{url_for('static', filename='nav-bar-screenshot.png')}}" class="rounded mx-auto d-block" alt="solar-wind-data-example">
+                                </div>
+                        </p>
 
-        <p>
-                Once you have selected a category of information, you will see the information presented on the
-                left-hand side or, if there are visualization options, you can choose the timeline over which you
-                would like to view the data on the left-hand menu:
-        </p>
-        <p>
-                <img src="{{url_for('static', filename='left-hand-information.png')}}">
-                <img src="{{url_for('static', filename='left-hand-menu.png')}}">
-        </p>
+                        <p>
+                                Once you have selected a category of information, you will see the information presented
+                                as a graph visualization or in text form:
+                        </p>
+                        <p>
+                                <img src="{{url_for('static', filename='graph-data.png')}}">
+                                <img src="{{url_for('static', filename='text-data.png')}}">
+                        </p>
+                </div>
+        </div>
 </div>
+
+
 
 {% endblock %}
