@@ -224,9 +224,21 @@ def feed(selection):
     """
             generates feed page html
     """
+
+    message = SolarWeatherFetcher.fetch_website_data("https://services.swpc.noaa.gov/products/alerts.json")[0]["message"]
+    issue_time_pos = message.find("Issue Time")
+    alert_pos = message.find("ALERT")
+    begin_time_pos = message.find("Begin Time")
+    description_pos = message.find("Description")
+
+    time = message[issue_time_pos:alert_pos]
+    alert = message[alert_pos:begin_time_pos]
+    description = message[description_pos:]
+
+
     response = al.get_custom_alert()
 
-    return render_template("feed.html", response=response)
+    return render_template("feed.html", response=response, time=time, alert=alert, description=description)
 
 
 @app.route("/customAlert")
