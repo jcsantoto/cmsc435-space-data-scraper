@@ -131,6 +131,22 @@
                 loadDoc();
         </script>
 
+<script>
+                function loadWarn() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("warning").innerHTML =
+                this.responseText;
+                }
+                };
+                xhttp.open("GET", "/warningAlert", true);
+                xhttp.send();
+                setTimeout(loadWarn, 1000);
+                }
+                loadWarn();
+        </script>
+
 <div class="container">
     <div class="row page-row">
         <div class="row">
@@ -223,6 +239,29 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+    <div class="row page-row">
+         <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center" style="font-size: 20pt">
+                    Monitor Satelitte Safety:
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 40px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row">
+            <div id="warning">
+            <div class="container"  style="width: 50%">
+                <div> {{ response4 }} </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 

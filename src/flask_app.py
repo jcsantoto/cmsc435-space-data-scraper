@@ -221,6 +221,11 @@ def threshold_alert():
 
     return al.get_threshold_alert()
 
+@app.route("/warningAlert")
+def warning_alert():
+
+    return al.get_warning()
+
 @app.route("/getThreshold", methods=['POST'])
 def get_threshold():
     data = request.get_json()
