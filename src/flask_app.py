@@ -1,14 +1,16 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
-from src.solar_weather_fetcher import SolarWeatherFetcher
-from src.solar_flare_fetcher import SolarFlareFetcherSWL
-from src.solar_flare_fetcher import SolarFlareFetcherNOAA
-from src.alerts_backend import Alerts
+from solar_weather_fetcher import SolarWeatherFetcher
+from solar_flare_fetcher import SolarFlareFetcherSWL
+from solar_flare_fetcher import SolarFlareFetcherNOAA
+from alerts_backend import Alerts
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-import src.forms
-import src.solar_weather_stat
+import forms
+import solar_weather_stat
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
+import uuid
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -126,6 +128,34 @@ def community():
             generates community page html
     """
     return render_template("community.html")
+
+@app.route("/community/community_create_post")
+def community_create_post():
+    """
+        generates the create posts page
+    """
+    return render_template("community_create_post.html")
+
+@app.route("/community/community_create_post", methods=['POST'])
+def create_community_post():
+    """
+        Upload the file on form submission for community post
+    """
+    post_title = request.form['post-title']
+    post_content = request.form['post-content']
+
+    comm_post = Post(id=uuid.uuid4(), title=post_title, content=post_content, user_id=0)
+    db.session.add(comm_post)
+    db.session.commit()
+
+    return redirect(url_for('community_posts'))
+
+@app.route("/community/community_posts")
+def community_posts():
+    """
+        generates the community posts page
+    """
+    return render_template("community_posts.html", post_list=Post.query.all())
 
 
 @app.route("/register", methods=['GET', 'POST'])
