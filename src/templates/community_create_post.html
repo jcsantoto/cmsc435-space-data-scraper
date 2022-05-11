@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<div class="container" style="width: 50%">
+    <div class="page-row">
+        <h3 style="text-align: center; margin-bottom: 20px">Create a Post</h3>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="post-title"><b>Title:</b></label>
+            <input type="text" id="post-title" name="post-title" style="margin:20px">
+            <br>
+            <label for="post-content"><b>Content:</b></label>
+            <input type="text" id="post-content" name="post-content" style="margin:20px">
+
+            <input type="submit" value="Upload" class="btn btn-primary" style="width: 50%; margin-left: 25%">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
