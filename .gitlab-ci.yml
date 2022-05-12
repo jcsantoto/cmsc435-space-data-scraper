@@ -44,10 +44,25 @@ test_alerts:
     script:
     - pip install requests
     - pip install beautifulsoup4
-    - python -m unittest tests/alerts_tests.py
+    - python -m unittest tests/test_alerts.py
 
 test_data_fetch:
     script:
     - pip install requests
     - pip install beautifulsoup4
     - python -m unittest tests/test_data_fetcher.py
+
+test_weather_stat:
+    script:
+    - pip install requests
+    - pip install beautifulsoup4
+    - pip install numpy
+    - pip install sklearn
+    - python -m unittest tests/test_solar_weather_stat.py
+
+coverage:
+  script:
+  - pip install numpy
+  - pip install sklearn
+  - pip install pytest-cov
+  - python -m pytest --cov-report term-missing --cov=src

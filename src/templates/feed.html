@@ -2,14 +2,32 @@
 
 {% block content %}
 
+{% if not current_user.is_authenticated %}
+<div class="container">
+    <div class="row page-row">
+        <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center" style="font-size: 20pt">
+                    You must be logged in to customize your feed.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type = "text/javascript">
     function check_selection(){
         var temperature = 0;
         var density = 0;
         var speed = 0;
+		var sunspot = 0;
         var t = document.getElementById("temperature");
         var d = document.getElementById("density");
         var s = document.getElementById("speed");
+		var ssn = document.getElementById("sunspot");
 
         if(t.checked){
             temperature = 1;
@@ -20,23 +38,239 @@
         if(s.checked){
             speed = 1;
         }
+		if(ssn.checked){
+            sunspot = 1;
+        }
 
         var selection = ((( density << 1) | (speed)) << 1 )  | temperature;
 
-        window.location.href = '../feed/' + selection;
+        //window.location.href = '../feed/' + selection;
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for("get_selection") }}",
+            contentType: "application/json",
+            data: JSON.stringify({temperature: temperature, density: density, speed: speed, sunspot: sunspot}),
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+
 
     }
 
 </script>
 
-<input type="checkbox" id="temperature" name="temperature" value="Temperature">
-<label for="temperature"> Temperature </label><br>
-<input type="checkbox" id="speed" name="speed" value="Speed">
-<label for="speed"> Speed </label><br>
-<input type="checkbox" id="density" name="density" value="Density">
-<label for="density"> Density </label><br>
-<button type="button" onclick="check_selection()">Apply Changes</button>
-<p> {{ response }} </p>
+<script type = "text/javascript">
+    function threshold_selection(){
+        var temperature = 0;
+        var density = 0;
+        var speed = 0;
+        var t = parseInt(document.getElementById("temp").value);
+        var d = parseInt(document.getElementById("dens").value);
+        var s = parseInt(document.getElementById("wind").value);
+
+
+
+        var selection = ((( density << 1) | (speed)) << 1 )  | temperature;
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for("get_threshold") }}",
+            contentType: "application/json",
+            data: JSON.stringify({temperature: t, density: d, speed: s}),
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+
+
+    }
+
+</script>
+
+<script>
+                function loadThres() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML =
+                this.responseText;
+                }
+                };
+                xhttp.open("GET", "/thresholdAlert", true);
+                xhttp.send();
+                setTimeout(loadThres, 1000);
+                }
+                loadThres();
+        </script>
+
+<script>
+                function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo2").innerHTML =
+                this.responseText;
+                }
+                };
+                xhttp.open("GET", "/customAlert", true);
+                xhttp.send();
+                setTimeout(loadDoc, 1000);
+                }
+                loadDoc();
+        </script>
+
+<script>
+                function loadWarn() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("warning").innerHTML =
+                this.responseText;
+                }
+                };
+                xhttp.open("GET", "/warningAlert", true);
+                xhttp.send();
+                setTimeout(loadWarn, 1000);
+                }
+                loadWarn();
+        </script>
+
+<div class="container">
+
+    <div class="row page-row">
+        <h2> {{ time }} </h2>
+        <h2> {{ alert }} </h2>
+        <h2> {{ description }} </h2>
+    </div>
+
+    <div class="row page-row">
+        <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center" style="font-size: 20pt">
+                    Set thresholds for solar weather alerts:
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <label for="temp">Temperature:</label>
+                    <input type="number" id="temp" name="temp"><br><br>
+                </div>
+
+                <div class="form-check">
+                    <label for="density">Density:</label>
+                    <input type="number" id="dens" name="dens"><br><br>
+                </div>
+
+                <div class="form-check">
+                    <label for="wind">Wind Speed:</label>
+                    <input type="number" id="wind" name="wind"><br><br>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" style="height: 50px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" style="width: 250px" onclick="threshold_selection()">Apply Changes</button>
+        </div>
+        <div class="row" style="height: 50px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row">
+            <div id = "demo">
+            <div class="container"  style="width: 50%">
+                <p>  </p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row page-row">
+        <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center" style="font-size: 20pt">
+                    Select your space weather attributes:
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="temperature" name="temperature" value="Temperature">
+                    <label class="form-check-label" for="temperature"> Temperature </label><br>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="density" name="density" value="Density">
+                    <label class="form-check-label" for="density"> Density </label><br>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="speed" name="speed" value="Speed">
+                    <label class="form-check-label" for="speed"> Speed </label><br>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="sunspot" name="sunspot" value="Sunspot">
+                    <label class="form-check-label" for="sunspot"> Sunspot </label><br>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 50px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" style="width: 250px" onclick="check_selection()">Apply Changes</button>
+        </div>
+        <div class="row" style="height: 50px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row">
+            <div id = "demo2">
+            <div class="container"  style="width: 50%">
+                <p> {{ response }} </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="row page-row">
+         <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center" style="font-size: 20pt">
+                    Monitor Satelitte Safety:
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 40px">
+            <!-- space out the other rows -->
+        </div>
+        <div class="row">
+            <div id="warning">
+            <div class="container"  style="width: 50%">
+                <div> {{ response4 }} </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
 
 
 

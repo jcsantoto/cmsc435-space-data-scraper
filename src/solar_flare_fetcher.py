@@ -60,8 +60,17 @@ class SolarFlareFetcherSWL:
 
 
 class SolarFlareFetcherNOAA:
+    """ A class representing an instance of fetching solar flare data from NOAA
+
+    """
     @staticmethod
     def fetch_website_data() -> list:
+        """
+            Method to get data from website
+
+        Returns:
+              returns a list of data
+        """
 
         url = "https://services.swpc.noaa.gov/json/goes/primary/xray-flares-latest.json"
 
@@ -83,6 +92,12 @@ class SolarFlareFetcherNOAA:
 
     @staticmethod
     def format_website_data() -> str:
+        """
+        Note:
+            A method for formatting the webdata that was fetched through the requests
+        Returns:
+            returns a str
+        """
 
         flare_data = SolarFlareFetcherNOAA.fetch_website_data()
 

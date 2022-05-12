@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Solar Flare &#8212; Space Data Scraper Sprint3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="solar-flare">
+<h1>Solar Flare<a class="headerlink" href="#solar-flare" title="Permalink to this headline">¶</a></h1>
+<p>the file containing the code for solar flare data</p>
+<span class="target" id="module-src.solar_flare_fetcher"></span><dl class="py class">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherNOAA">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">src.solar_flare_fetcher.</span></span><span class="sig-name descname"><span class="pre">SolarFlareFetcherNOAA</span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherNOAA" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class representing an instance of fetching solar flare data from NOAA</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherNOAA.fetch_website_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">fetch_website_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherNOAA.fetch_website_data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Method to get data from website</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>returns a list of data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherNOAA.format_website_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">format_website_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherNOAA.format_website_data" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Note:</dt><dd><p>A method for formatting the webdata that was fetched through the requests</p>
+</dd>
+<dt>Returns:</dt><dd><p>returns a str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherSWL">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">src.solar_flare_fetcher.</span></span><span class="sig-name descname"><span class="pre">SolarFlareFetcherSWL</span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherSWL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for fetching solar flare activity from spaceweatherlive</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherSWL.fetch_website_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">fetch_website_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherSWL.fetch_website_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests the HTML content from the spaceweatherlive website containing the current and highest solar flare
+classifications for the past 24 and 72 hours.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p>lst: a list of each minute of solar weather data (time, density, speed, temperature) for the last 24 hours</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.solar_flare_fetcher.SolarFlareFetcherSWL.format_website_data">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">format_website_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#src.solar_flare_fetcher.SolarFlareFetcherSWL.format_website_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the solar flare data from spaceweatherlive into a more readable string</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>formatted_str: string containing the data formatted in a readable way</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Space Data Scraper</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Maurice B., John S., Abhinav N., Johnny T., Derek P..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/solarFlare.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

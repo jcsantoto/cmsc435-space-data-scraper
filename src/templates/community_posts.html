@@ -1,0 +1,84 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<template>
+    <div class="communityUploadCard">
+        <h4 id="postTitle" style="color: black; padding: 10px 10px 0px 10px; margin: 1px"></h4>
+        <h5 id="postUser" style="color: gray; padding: 0px 0px 0px 10px; margin 1px"></h5>
+
+
+            <div style="display:none;">
+                <p>id</p>
+            </div>
+
+            <button type="button" style="margin: 20px" class="btn btn-primary">View Content</button>
+
+            <div class="post_content">
+                <textarea rows="3" cols="70" wrap="hard">
+                    Content Here
+                </textarea>
+            </div>
+
+    </div>
+</template>
+
+<!--<div sytle="margin: 0px auto;"><button onClick="testCommunityCards()">Test Community Upload Cards</button></div>-->
+
+
+<div class="container">
+    <div class="page-row">
+        <div id="communityUploadArea">
+            <h3 style="font-family: sans-serif; text-align: center">Community Uploads</h3>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    {% for post in post_list %}
+
+        displayCard("{{ post["title"] }}", "{{ post["user_id"] }}", "{{ post["content"] }}", "{{ post["id"] }}", "{{ post["date"] }}");
+
+    {% endfor %}
+
+    var coll = document.getElementsByClassName("btn btn-primary");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        var id = this.previousElementSibling.textContent;
+
+        addToHistory(id);
+
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+         }
+        else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+        });
+    }
+
+    function displayCard() {
+        let templateCard = document.getElementsByTagName("template")[0];
+        let cardInstance = templateCard.content.cloneNode(true);
+
+        let contentSpace = document.getElementById("communityUploadArea")[0];
+        contentSpace.appendChild(cardInstance);
+    }
+
+    function addToHistory(id){
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/community/community_posts", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            postid: id
+        }));
+    }
+</script>
+
+{% endblock %}

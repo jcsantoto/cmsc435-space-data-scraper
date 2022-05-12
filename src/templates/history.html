@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<div>
+    <h2>History of Viewed Posts</h2>
+    <div>
+        {% for post in history %}
+        <div class="row page-row">
+            <h4> Title: {{ post["title"]}}  </h4>
+            <h4> ID: {{ post["id"]}} </h4>
+            <h4> Posted by: {{ post["poster"]}}  </h4>
+            <h4> Content: </h4>
+            <textarea readonly rows="3" cols="70" wrap="hard">{{ post["content"] }}</textarea>
+
+            <br>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

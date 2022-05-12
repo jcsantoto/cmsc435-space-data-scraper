@@ -1,0 +1,6 @@
+[run]
+omit =
+    src/flask_app.py
+    src/forms.py
+    src/follow_user.py
+    src/alerts_backend.py

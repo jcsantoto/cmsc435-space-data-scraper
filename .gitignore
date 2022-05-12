@@ -2,3 +2,5 @@
 .coverage
 __pycache__
 .DS_Store
+venv1
+site.db

@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Alerts &#8212; Space Data Scraper Sprint3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="alerts">
+<h1>Alerts<a class="headerlink" href="#alerts" title="Permalink to this headline">¶</a></h1>
+<p>Python file containing code for alerts feed</p>
+<span class="target" id="module-src.alerts_backend"></span><dl class="py class">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">src.alerts_backend.</span></span><span class="sig-name descname"><span class="pre">Alerts</span></span><a class="headerlink" href="#src.alerts_backend.Alerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class representing an Alerts feed</p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>For now the Alerts contain information on the density, wind, temperature, sunspot, density threshold,
+wind threshold, and temperature threshold.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.customize_alerts">
+<span class="sig-name descname"><span class="pre">customize_alerts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_wind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_sunspot</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.customize_alerts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows user to customize alerts to show various weather attributes
+Args:</p>
+<blockquote>
+<div><p>custom_density: user input to show or not show density
+custom_wind: user input to show or not show wind
+custom_temperature: user input to show or not show temperature
+custom_sunspot: user input to show or not show sunspot</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.customize_thresholds">
+<span class="sig-name descname"><span class="pre">customize_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_wind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_temperature</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.customize_thresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows user to customize thresholds to show various weather attributes
+Args:</p>
+<blockquote>
+<div><p>custom_density: user input for density threshold
+custom_wind: user input for wind threshold
+custom_temperature: user input for temperature threshold</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.get_alert">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_alert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.get_alert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obsolete method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.get_custom_alert">
+<span class="sig-name descname"><span class="pre">get_custom_alert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.get_custom_alert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows general information about solar weather which is based off the user’s custom settings on what to show</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.get_threshold_alert">
+<span class="sig-name descname"><span class="pre">get_threshold_alert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.get_threshold_alert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows information about solar weather which is based off the user’s custom threshold settings</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.alerts_backend.Alerts.get_warning">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_warning</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.alerts_backend.Alerts.get_warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows information about dangerous solar weather conditions if thresholds are met</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Space Data Scraper</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Maurice B., John S., Abhinav N., Johnny T., Derek P..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/alerts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
