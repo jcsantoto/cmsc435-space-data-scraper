@@ -21,7 +21,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 al = Alerts()
-
+db_started = False
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
     thres_temp = db.Column(db.Float, default=float('inf'))
     thres_dens = db.Column(db.Float, default=float('inf'))
     thres_speed = db.Column(db.Float, default=float('inf'))
-    post_history = db.Column(db.String(30), default="")
+    post_history = db.Column(db.String(180), default="")
     
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.biography}')"
@@ -59,11 +59,22 @@ class Post(db.Model):
         return f"Post('{self.title}', '{self.date_posted}')"
 
 
+@app.route("/reset_db")
+def reset_db():
+    db.drop_all()
+    return redirect("/", code=302)
+
+
 @app.route("/")
 def home():
     """
         generates home page html
     """
+    global db_started
+    if not db_started:
+        db.create_all()
+        db_started = True
+
     return render_template("index.html")
 
 
@@ -137,25 +148,64 @@ def community_create_post():
     return render_template("community_create_post.html")
 
 @app.route("/community/community_create_post", methods=['POST'])
+@login_required
 def create_community_post():
     """
         Upload the file on form submission for community post
     """
     post_title = request.form['post-title']
     post_content = request.form['post-content']
+    user = User.query.filter_by(id=current_user.id).first()
 
-    comm_post = Post(id=uuid.uuid4(), title=post_title, content=post_content, user_id=0)
+    post_id = str(uuid.uuid4())[:8]
+
+    comm_post = Post(id=post_id, title=post_title, content=post_content, user_id=user.username)
+
     db.session.add(comm_post)
     db.session.commit()
 
     return redirect(url_for('community_posts'))
 
+
 @app.route("/community/community_posts")
+@login_required
 def community_posts():
     """
         generates the community posts page
     """
-    return render_template("community_posts.html", post_list=Post.query.all())
+
+    posts = Post.query.all()
+    post_list = []
+    for p in posts:
+        post_list.append({"id": p.id, "title": p.title, "date": p.date_posted, "content": p.content, "user_id": p.user_id})
+
+    post_list.reverse()
+
+    return render_template("community_posts.html", post_list=post_list)
+
+@app.route("/community/community_posts", methods=['POST'])
+@login_required
+def add_post_history():
+    """
+        receives post id and adds to user history
+    """
+
+    data = request.get_json()
+    user = User.query.filter_by(id=current_user.id).first()
+
+    temp_history = user.post_history
+
+    if str(data['postid']).strip() in temp_history:
+        return
+
+    if temp_history == "":
+        temp_history = temp_history + str(data['postid']).strip()
+    else:
+        temp_history = temp_history + ',' + str(data['postid']).strip()
+
+    user.post_history = temp_history
+    db.session.commit()
+    return redirect("/community/community_posts")
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -233,17 +283,22 @@ def account():
 @login_required
 def history():
     user = User.query.filter_by(id=current_user.id).first()
+
+    if user.post_history == "":
+        return render_template('history.html')
+
     user_history = user.post_history.split(",")
+    history_length = len(user_history)
 
     posts = []
-
-    for i in range(len(user_history)):
-        p = Post.query.filter_by(id=user_history[i]).first()
-        u = User.query.filter_by(id=p.user_id).first()
+    for post_num in range(history_length):
+        p = Post.query.filter_by(id=user_history[post_num]).first()
+        u = User.query.filter_by(username=p.user_id).first()
         posts.append({"title": p.title, "poster": u.username, "id": p.id, "content": p.content})
 
     return render_template('history.html', history=posts)
 
+    
 @app.route("/help")
 def help():
     """
