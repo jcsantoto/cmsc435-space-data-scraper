@@ -29,6 +29,28 @@ From there, there are numerous tabs you can visit which are described below:
 * Community: See what other users have posted on the website <br>
 * History: See community posts that you have looked at previously
 
+# Developer Documentation
+The `docs` folder contains the project's automatically-generated Sphinx documentation. To access the Sphinx documentation,
+open on the `index.html` file in a browser. This will open the main page that links to the specific module pages.
+
+### src
+- `alerts_backend`: Python module that contains implementation for alerts feed and functions
+- `data_fetcher`: Python module that contains implementation for data fetcher functions
+- `flask_app`: Python flask app that has the implementation for the web app
+- `follow_user`: Python module for that has the implementation for the follow user forms
+- `forms`: Python module that contains the implementation of the forms
+- `solar_flare_fetcher`: Python module that contains implementation for the solar flare fetcher
+- `solar weather fetcher`: Python module that contains the implementation for the weather fetcher
+- `solar weather stat`: Python module that contains the implementation for the solar weather stat
+
+### tests
+Within the `tests` folder is the following:
+- `test_alerts.py`: the Python unit test file that tests all of the functions in alerts
+- `test_data_fetcher.py`: the Python unit test file that tests all of the functions in data fetcher module
+- `test_graph_weather_fetcher.py`: the Python unit test file that test all of functions in graph weather fetcher module
+- `test_solar_flare_fetcher.py`: the Python test unit file that tests all functions in the solar flare fetcher module
+- `test_solar_weather_stat.py`: the python test unit file that tests all of the functions in the solar weather stat module
+
 # Group Efforts and Tasks
 
 #### Abhinav: 16%
