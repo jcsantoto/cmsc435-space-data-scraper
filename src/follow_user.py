@@ -20,6 +20,14 @@ class FollowUser:
             return False
 
     def unfollow_user(self, username):
+        """
+
+        Args:
+            username:
+
+        Returns:
+
+        """
         if username in self.get_list_of_users():
             if username in self.users:
                 self.users.remove(username)

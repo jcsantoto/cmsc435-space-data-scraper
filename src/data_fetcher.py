@@ -5,6 +5,10 @@ import string
 
 class DataFetcher:
     """ Class for fetching the data that comes from the NOAA website.
+
+    Note:
+        For now the dataFetcher class is what collects data from the NOAA website and downloads the past 30 day
+        data set
     """
 
     @staticmethod
