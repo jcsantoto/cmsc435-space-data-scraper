@@ -4,4 +4,3 @@ __pycache__
 .DS_Store
 venv1
 site.db
-docs/build

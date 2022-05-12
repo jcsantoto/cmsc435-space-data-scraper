@@ -4,7 +4,12 @@ from src.solar_weather_fetcher import SolarWeatherFetcher
 
 
 class Alerts:
+    """ A class representing an Alerts feed
 
+    Note:
+        For now the Alerts contain information on the density, wind, temperature, sunspot, density threshold,
+        wind threshold, and temperature threshold.
+    """
     def __init__(self):
         self.density = True
         self.wind = True
