@@ -4,8 +4,22 @@
 
 <template>
     <div class="communityUploadCard">
-        <h4 id="postTitle" style="color: black; padding: 10px 10px 0px 10px; margin: 1px">Post Title</h4>
-        <h5 id="postUser" style="color: gray; padding: 0px 0px 0px 10px; margin 1px">username</h5>
+        <h4 id="postTitle" style="color: black; padding: 10px 10px 0px 10px; margin: 1px"></h4>
+        <h5 id="postUser" style="color: gray; padding: 0px 0px 0px 10px; margin 1px"></h5>
+
+
+            <div style="display:none;">
+                <p>id</p>
+            </div>
+
+            <button type="button" style="margin: 20px" class="btn btn-primary">View Content</button>
+
+            <div class="post_content">
+                <textarea rows="3" cols="70" wrap="hard">
+                    Content Here
+                </textarea>
+            </div>
+
     </div>
 </template>
 
@@ -23,10 +37,31 @@
 </div>
 
 <script>
+    {% for post in post_list %}
 
-    let post_list = {{ post_list }};
+        displayCard("{{ post["title"] }}", "{{ post["user_id"] }}", "{{ post["content"] }}", "{{ post["id"] }}", "{{ post["date"] }}");
 
-    console.log(post_list);
+    {% endfor %}
+
+    var coll = document.getElementsByClassName("btn btn-primary");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        var id = this.previousElementSibling.textContent;
+
+        addToHistory(id);
+
+        if (content.style.maxHeight){
+            content.style.maxHeight = null;
+         }
+        else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+        });
+    }
 
     function displayCard() {
         let templateCard = document.getElementsByTagName("template")[0];
@@ -36,10 +71,14 @@
         contentSpace.appendChild(cardInstance);
     }
 
-    function testCommunityCards() {
-        displayCard();
+    function addToHistory(id){
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/community/community_posts", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            postid: id
+        }));
     }
-
 </script>
 
 {% endblock %}
